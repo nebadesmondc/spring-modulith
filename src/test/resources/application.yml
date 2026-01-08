@@ -1,0 +1,14 @@
+spring:
+#  datasource:
+#    username: ${POSTGRES_USER:postgres}
+#    password: ${POSTGRES_PASSWORD:password}
+#    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/spring_monolith
+
+  docker:
+    compose:
+      skip:
+        in-tests: false
+
+logging:
+  level:
+    org.springframework.modulith: DEBUG
