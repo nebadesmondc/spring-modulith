@@ -4,12 +4,12 @@ services:
     environment:
       - 'POSTGRES_DB=spring_monolith'
       - 'POSTGRES_PASSWORD=password'
-      - 'POSTGRES_USER=admin'
+      - 'POSTGRES_USER=postgres'
     ports:
-      - '5432'
+      - '5432:5432'
 
     volumes:
-      - /c/tmp/postgres_data:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
 
 volumes:
   postgres:
