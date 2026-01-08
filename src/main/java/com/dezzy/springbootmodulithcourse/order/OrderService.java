@@ -1,9 +1,10 @@
-package com.dezzy.springbootmodulithcourse.Order;
+package com.dezzy.springbootmodulithcourse.order;
 
-import com.dezzy.springbootmodulithcourse.Order.dto.InventoryRequestDto;
-import com.dezzy.springbootmodulithcourse.Order.dto.OrderDto;
-import com.dezzy.springbootmodulithcourse.Order.dto.OrderResponseDto;
-import com.dezzy.springbootmodulithcourse.Order.type.Status;
+import com.dezzy.springbootmodulithcourse.order.dto.InventoryRequestDto;
+import com.dezzy.springbootmodulithcourse.order.dto.OrderDto;
+import com.dezzy.springbootmodulithcourse.order.dto.OrderPaymentDto;
+import com.dezzy.springbootmodulithcourse.order.dto.OrderResponseDto;
+import com.dezzy.springbootmodulithcourse.order.type.Status;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryDto;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class OrderService {
     private final InventoryService inventoryService;
     private final OrderRepository orderRepository;
     private final OrderInventoryRepository orderInventoryRepository;
+    private final OrderEventService orderEventService;
 
     public OrderResponseDto createOrder(OrderDto orderDto) {
 
@@ -36,6 +38,9 @@ public class OrderService {
         log.info("Order with id {} has been created successfully", order.getOrderIdentifier());
 
         buildAndPersistOrderInventories(orderDto, inventories, order.getId(), amount);
+
+        OrderPaymentDto orderPaymentDto = new OrderPaymentDto(order.getOrderIdentifier(), amount.get());
+        orderEventService.completeOrder(orderPaymentDto);
 
 
         return new OrderResponseDto("Order created successfully");

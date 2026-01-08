@@ -1,4 +1,4 @@
 @org.springframework.modulith.ApplicationModule(
         allowedDependencies = {"inventory::exposed"}
 )
-package com.dezzy.springbootmodulithcourse.Order;
+package com.dezzy.springbootmodulithcourse.order;

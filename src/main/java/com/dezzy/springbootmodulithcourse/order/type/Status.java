@@ -1,4 +1,4 @@
-package com.dezzy.springbootmodulithcourse.Order.type;
+package com.dezzy.springbootmodulithcourse.order.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

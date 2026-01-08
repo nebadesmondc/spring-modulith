@@ -1,4 +1,4 @@
-package com.dezzy.springbootmodulithcourse.Order;
+package com.dezzy.springbootmodulithcourse.order;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

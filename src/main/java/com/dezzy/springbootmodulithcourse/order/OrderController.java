@@ -1,7 +1,7 @@
-package com.dezzy.springbootmodulithcourse.Order;
+package com.dezzy.springbootmodulithcourse.order;
 
-import com.dezzy.springbootmodulithcourse.Order.dto.OrderDto;
-import com.dezzy.springbootmodulithcourse.Order.dto.OrderResponseDto;
+import com.dezzy.springbootmodulithcourse.order.dto.OrderDto;
+import com.dezzy.springbootmodulithcourse.order.dto.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

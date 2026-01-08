@@ -1,6 +1,6 @@
-package com.dezzy.springbootmodulithcourse.Order;
+package com.dezzy.springbootmodulithcourse.order;
 
-import com.dezzy.springbootmodulithcourse.Order.type.Status;
+import com.dezzy.springbootmodulithcourse.order.type.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.dezzy.springbootmodulithcourse.Order.typeconverter;
+package com.dezzy.springbootmodulithcourse.order.typeconverter;
 
-import com.dezzy.springbootmodulithcourse.Order.type.Status;
+import com.dezzy.springbootmodulithcourse.order.type.Status;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

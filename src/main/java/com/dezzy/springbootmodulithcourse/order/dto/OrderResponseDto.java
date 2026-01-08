@@ -1,4 +1,4 @@
-package com.dezzy.springbootmodulithcourse.Order.dto;
+package com.dezzy.springbootmodulithcourse.order.dto;
 
 
 public record OrderResponseDto(

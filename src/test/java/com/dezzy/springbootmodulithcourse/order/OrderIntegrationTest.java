@@ -1,14 +1,13 @@
-package com.dezzy.springbootmodulithcourse.Order;
+package com.dezzy.springbootmodulithcourse.order;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.modulith.test.ApplicationModuleTest;
 
 @ApplicationModuleTest(mode = ApplicationModuleTest.BootstrapMode.DIRECT_DEPENDENCIES)
-class OrderInventoryIntegrationTest {
+class OrderIntegrationTest {
 
     @Test
     void verifyModule() {
 
     }
-
 }
