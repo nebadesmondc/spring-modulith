@@ -10,7 +10,6 @@ import org.springframework.modulith.test.ApplicationModuleTest;
 import org.springframework.modulith.test.Scenario;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,8 +45,9 @@ class OrderIntegrationTest {
 
     @Test
     void publishOrderPaymentDto(Scenario scenario) {
+        long randomOrderId = java.util.concurrent.ThreadLocalRandom.current().nextLong(1, 100000);
 
-        scenario.publish(new OrderPaymentDto(UUID.randomUUID().toString(), 5000L))
+        scenario.publish(new OrderPaymentDto(randomOrderId, 5000L))
                 .andWaitForEventOfType(OrderPaymentDto.class)
                 .matching(event -> event.amount() == 5000L)
                 .toArriveAndVerify(ev -> System.out.println(ev.amount()));

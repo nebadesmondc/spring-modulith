@@ -8,7 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(indexes = {
+        @Index(name = "actionIdx", columnList = "action")
+})
 public class EventAction {
 
     @Id

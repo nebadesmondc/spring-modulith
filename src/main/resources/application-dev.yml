@@ -7,3 +7,12 @@ spring:
   sql:
     init:
       mode: never
+
+delete:
+  event:
+    duration: 5000
+
+logging:
+  level:
+    org.springframework.modulith: DEBUG
+    org.springframework.web: DEBUG

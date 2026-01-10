@@ -1,5 +1,6 @@
 package com.dezzy.springbootmodulithcourse.order;
 
+import com.dezzy.springbootmodulithcourse.order.dto.CompleteOrderDto;
 import com.dezzy.springbootmodulithcourse.order.dto.OrderDto;
 import com.dezzy.springbootmodulithcourse.order.dto.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderDto orderDto) {
         return new ResponseEntity<>(orderService.createOrder(orderDto), HttpStatus.OK);
+    }
+
+    @PostMapping(path = "complete")
+    public ResponseEntity<CompleteOrderDto> completeOrder(@RequestBody CompleteOrderDto completeOrder) {
+        return new ResponseEntity<>(orderService.completeOrder(completeOrder), HttpStatus.OK);
     }
 }

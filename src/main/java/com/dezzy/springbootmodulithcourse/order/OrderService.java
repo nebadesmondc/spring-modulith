@@ -1,9 +1,6 @@
 package com.dezzy.springbootmodulithcourse.order;
 
-import com.dezzy.springbootmodulithcourse.order.dto.InventoryRequestDto;
-import com.dezzy.springbootmodulithcourse.order.dto.OrderDto;
-import com.dezzy.springbootmodulithcourse.order.dto.OrderPaymentDto;
-import com.dezzy.springbootmodulithcourse.order.dto.OrderResponseDto;
+import com.dezzy.springbootmodulithcourse.order.dto.*;
 import com.dezzy.springbootmodulithcourse.order.type.Status;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryDto;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryService;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
@@ -39,8 +37,15 @@ public class OrderService {
 
         buildAndPersistOrderInventories(orderDto, inventories, order.getId(), amount);
 
-        OrderPaymentDto orderPaymentDto = new OrderPaymentDto(order.getOrderIdentifier(), amount.get());
-        orderEventService.completeOrder(orderPaymentDto);
+        OrderPaymentDto orderPaymentDto = new OrderPaymentDto(order.getId(), amount.get());
+        EmailDto emailDto = new EmailDto(
+                orderDto.customerEmail(),
+                orderDto.customerName(),
+                order.getOrderIdentifier(),
+                orderPaymentDto.amount(),
+                false
+        );
+        orderEventService.completeOrder(orderPaymentDto, emailDto);
 
 
         return new OrderResponseDto("Order created successfully");
@@ -85,5 +90,26 @@ public class OrderService {
         order.setStatus(Status.COMPLETED);
 
         return orderRepository.save(order);
+    }
+
+    public CompleteOrderDto completeOrder(CompleteOrderDto completeOrder) {
+        Optional<Order> optOrder = orderRepository.getOrderById(completeOrder.orderId());
+
+        if (optOrder.isEmpty()) throw new RuntimeException("Order not found");
+
+        Order order = optOrder.get();
+
+        final long amount = orderInventoryRepository.orderIdAmount(order.getId());
+
+        EmailDto emailDto = new EmailDto(
+                order.getCustomerEmail(),
+                order.getCustomerName(),
+                order.getOrderIdentifier(),
+                amount,
+                true
+        );
+
+        orderEventService.completePayment(completeOrder, emailDto);
+        return completeOrder;
     }
 }
