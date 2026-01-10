@@ -1,5 +1,5 @@
 @org.springframework.modulith.ApplicationModule(
-        allowedDependencies = {"order::dto"}
+        allowedDependencies = {"order::dto", "exception"}
 )
 
 package com.dezzy.springbootmodulithcourse.payment;

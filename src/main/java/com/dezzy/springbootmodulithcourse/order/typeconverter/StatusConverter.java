@@ -1,5 +1,6 @@
 package com.dezzy.springbootmodulithcourse.order.typeconverter;
 
+import com.dezzy.springbootmodulithcourse.exception.ModulithException;
 import com.dezzy.springbootmodulithcourse.order.type.Status;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
@@ -13,13 +14,13 @@ public class StatusConverter implements AttributeConverter<Status, String> {
         return Arrays.stream(Status.values())
                 .filter(s -> s == status)
                 .map(Status::getCode)
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("Unknown status: " + status));
+                .findFirst().orElseThrow(() -> new ModulithException("Status not found"));
     }
 
     @Override
     public Status convertToEntityAttribute(String s) {
         return Arrays.stream(Status.values())
                 .filter(status -> status.getCode().equalsIgnoreCase(s))
-                .findFirst().orElseThrow(() -> new IllegalArgumentException("Unknown status code: " + s));
+                .findFirst().orElseThrow(() -> new ModulithException("Unknown status code: " + s));
     }
 }

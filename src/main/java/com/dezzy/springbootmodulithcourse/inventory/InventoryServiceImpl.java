@@ -1,5 +1,6 @@
 package com.dezzy.springbootmodulithcourse.inventory;
 
+import com.dezzy.springbootmodulithcourse.exception.ModulithException;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryDto;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ class InventoryServiceImpl  implements InventoryService {
     public InventoryDto fetchInventoryByName(String name) {
         return inventoryRepository.getInventoriesByName(name)
                 .map(InventoryUtil::toDto)
-                .orElseThrow(() -> new IllegalArgumentException("Inventory with name " + name + " not found"));
+                .orElseThrow(() -> new ModulithException("Inventory with name " + name + " not found"));
     }
 
     @Override

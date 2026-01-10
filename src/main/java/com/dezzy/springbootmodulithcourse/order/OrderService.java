@@ -1,5 +1,6 @@
 package com.dezzy.springbootmodulithcourse.order;
 
+import com.dezzy.springbootmodulithcourse.exception.ModulithException;
 import com.dezzy.springbootmodulithcourse.order.dto.*;
 import com.dezzy.springbootmodulithcourse.order.type.Status;
 import com.dezzy.springbootmodulithcourse.inventory.exposed.InventoryDto;
@@ -95,7 +96,7 @@ public class OrderService {
     public CompleteOrderDto completeOrder(CompleteOrderDto completeOrder) {
         Optional<Order> optOrder = orderRepository.getOrderById(completeOrder.orderId());
 
-        if (optOrder.isEmpty()) throw new RuntimeException("Order not found");
+        if (optOrder.isEmpty()) throw new ModulithException("Order with id not found: " + completeOrder.orderId());
 
         Order order = optOrder.get();
 

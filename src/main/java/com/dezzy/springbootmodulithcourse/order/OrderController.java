@@ -3,6 +3,7 @@ package com.dezzy.springbootmodulithcourse.order;
 import com.dezzy.springbootmodulithcourse.order.dto.CompleteOrderDto;
 import com.dezzy.springbootmodulithcourse.order.dto.OrderDto;
 import com.dezzy.springbootmodulithcourse.order.dto.OrderResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody @Valid OrderDto orderDto) {
         return new ResponseEntity<>(orderService.createOrder(orderDto), HttpStatus.OK);
     }
 
     @PostMapping(path = "complete")
-    public ResponseEntity<CompleteOrderDto> completeOrder(@RequestBody CompleteOrderDto completeOrder) {
+    public ResponseEntity<CompleteOrderDto> completeOrder(@RequestBody @Valid CompleteOrderDto completeOrder) {
         return new ResponseEntity<>(orderService.completeOrder(completeOrder), HttpStatus.OK);
     }
 }
